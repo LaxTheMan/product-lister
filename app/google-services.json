@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "631667777464",
+    "project_id": "product-lister-fcc20",
+    "storage_bucket": "product-lister-fcc20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631667777464:android:63a508afe31c3a7035794d",
+        "android_client_info": {
+          "package_name": "com.example.productlister"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631667777464-1lh5bf4motgdrk0smum95abpiu4e6a7o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR3rb4qHpSNuvjK_wHzZpxLyu6aV92kqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631667777464-1lh5bf4motgdrk0smum95abpiu4e6a7o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
