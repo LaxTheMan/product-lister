@@ -1,4 +1,4 @@
-package com.example.productlister.ui
+package com.example.productlister.ui.product_edit
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

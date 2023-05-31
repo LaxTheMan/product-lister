@@ -1,7 +1,5 @@
-package com.example.productlister.ui.components
+package com.example.productlister.ui.product_list.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
@@ -9,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -70,7 +67,7 @@ fun ProductListItem(
 @Composable
 fun ProductListItemPreview() {
     ProductListItem(
-        product = Product(123, "123", 123, 123f, 123, "", "", "", Date(), Date()),
+        product = Product(123, "123", 123, 123.0, 123, "", "", "", Date(), Date()),
         onEdit = {},
         onDelete = {})
 }

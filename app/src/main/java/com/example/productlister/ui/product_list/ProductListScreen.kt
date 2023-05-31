@@ -1,5 +1,6 @@
-package com.example.productlister.ui
+package com.example.productlister.ui.product_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,9 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.productlister.common.Screen
-import com.example.productlister.ui.components.ProductListItem
-import com.example.productlister.ui.viewmodel.ProductListState
-import com.example.productlister.util.ListEvent
+import com.example.productlister.ui.product_list.components.ProductListItem
+import com.example.productlister.ui.events.ListEvent
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,6 +55,7 @@ fun ProductListScreen(
                     .fillMaxSize()
                     .padding(contentPadding)
             ) {
+                Log.d("debug",state.products.toString())
                 items(state.products) { product ->
                     ProductListItem(product = product, onEdit = {
                         navController.navigate(Screen.ProductEditScreen.route + "/${product.id}")

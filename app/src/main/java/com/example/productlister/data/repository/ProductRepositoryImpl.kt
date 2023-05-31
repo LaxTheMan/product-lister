@@ -1,8 +1,8 @@
 package com.example.productlister.data.repository
 
-import androidx.lifecycle.LiveData
 import com.example.productlister.data.ProductDao
 import com.example.productlister.domain.model.Product
+import com.example.productlister.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

@@ -1,15 +1,16 @@
-package com.example.productlister.ui.viewmodel
+package com.example.productlister.ui.product_list
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.productlister.domain.model.Product
 import com.example.productlister.domain.use_cases.UseCases
-import com.example.productlister.util.ListEvent
+import com.example.productlister.ui.events.ListEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,7 +44,7 @@ class ProductListViewModel @Inject constructor(private val useCases: UseCases) :
 
             is ListEvent.RestoreProduct -> {
                 viewModelScope.launch {
-                    useCases.upsertProduct(recentlyDeletedProduct?: return@launch)
+                    useCases.upsertProduct(recentlyDeletedProduct ?: return@launch)
                     recentlyDeletedProduct = null
                 }
 
@@ -53,7 +54,16 @@ class ProductListViewModel @Inject constructor(private val useCases: UseCases) :
 
     private fun getProducts() {
         getProductsJob?.cancel()
-        getProductsJob = useCases.getProducts().launchIn(viewModelScope)
+        viewModelScope.launch {
+            Log.d("debug","fetching")
+            useCases.getProducts().onEach { products ->
+                _state.value = _state.value.copy(products = products)
+            }
+        }
+//        getProductsJob = useCases.getProducts().onEach { products ->
+//            Log.d("debug",products.toString())
+//            _state.value = _state.value.copy(products = products)
+//        }.launchIn(viewModelScope)
     }
 
 }

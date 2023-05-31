@@ -1,4 +1,4 @@
-package com.example.productlister.util
+package com.example.productlister.ui.events
 
 sealed class AddEvent{
     data class NameChanged(val name: String): AddEvent()

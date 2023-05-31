@@ -1,6 +1,6 @@
 package com.example.productlister.domain.use_cases
 
-import com.example.productlister.data.repository.ProductRepository
+import com.example.productlister.domain.repository.ProductRepository
 import com.example.productlister.domain.model.Product
 import javax.inject.Inject
 

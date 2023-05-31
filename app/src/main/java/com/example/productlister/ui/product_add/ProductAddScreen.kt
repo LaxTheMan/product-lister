@@ -1,6 +1,5 @@
-package com.example.productlister.ui
+package com.example.productlister.ui.product_add
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,11 +32,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.productlister.R
-import com.example.productlister.ui.components.CameraButton
-import com.example.productlister.ui.components.FormTextField
-import com.example.productlister.ui.viewmodel.ProductAddState
-import com.example.productlister.ui.viewmodel.ProductAddViewModel
-import com.example.productlister.util.AddEvent
+import com.example.productlister.ui.product_add.components.CameraButton
+import com.example.productlister.ui.product_add.components.FormTextField
+import com.example.productlister.ui.events.AddEvent
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -112,9 +109,15 @@ fun ProductAddScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            FormTextField(text = state.name, placeholder = "Name", onValueChange = {
+            FormTextField(
+                text = state.name,
+                placeholder = "Name",
+                onValueChange = {
                 onEvent(AddEvent.NameChanged(it))
-            }, keyboardType = KeyboardType.Text, imeAction = ImeAction.Next, leadingIcon = {
+            },
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+                leadingIcon = {
                 Icon(
                     painter = painterResource(R.drawable.outline_label_24),
                     contentDescription = null
@@ -130,11 +133,10 @@ fun ProductAddScreen(
                 text = priceDisplayed,
                 placeholder = "Price",
                 onValueChange = { newValue ->
-
                     val sanitisedText = newValue.filter { it.isDigit() }
                     onEvent(AddEvent.PriceChanged(sanitisedText))
-
-                }, keyboardType = KeyboardType.Number,
+                },
+                keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Next,
                 leadingIcon = {
                     Icon(
@@ -152,13 +154,8 @@ fun ProductAddScreen(
                 text = pricePerGDisplayed,
                 placeholder = "Price / Gram",
                 onValueChange = { newValue ->
-
-                    Log.d("debug",newValue)
-                    // will crash if another decimal point is added by keyboard
-                    val sanitisedText = newValue.filter { it.isDigit() || it == '.'}
-                    Log.d("debug",sanitisedText)
+                    val sanitisedText = newValue.filter { it.isDigit() || it == '.' }
                     onEvent(AddEvent.PricePerGChanged(sanitisedText))
-
                 },
                 keyboardType = KeyboardType.Decimal,
                 imeAction = ImeAction.Next,

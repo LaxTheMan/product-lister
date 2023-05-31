@@ -1,9 +1,9 @@
-package com.example.productlister.ui.viewmodel
+package com.example.productlister.ui.product_list
 
 import com.example.productlister.domain.model.Product
 
 data class ProductListState(
-    val products: List<Product> = emptyList(),
+    var products: List<Product> = emptyList(),
     val error: String = "",
     val isLoading: Boolean = false
 )

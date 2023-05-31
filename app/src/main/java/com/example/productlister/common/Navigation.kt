@@ -2,15 +2,14 @@ package com.example.productlister.common
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.productlister.ui.ProductAddScreen
-import com.example.productlister.ui.ProductEditScreen
-import com.example.productlister.ui.ProductListScreen
-import com.example.productlister.ui.viewmodel.ProductAddViewModel
-import com.example.productlister.ui.viewmodel.ProductListViewModel
+import com.example.productlister.ui.product_add.ProductAddScreen
+import com.example.productlister.ui.product_edit.ProductEditScreen
+import com.example.productlister.ui.product_list.ProductListScreen
+import com.example.productlister.ui.product_add.ProductAddViewModel
+import com.example.productlister.ui.product_list.ProductListViewModel
 
 @Composable
 fun Navigation(navController: NavHostController) {

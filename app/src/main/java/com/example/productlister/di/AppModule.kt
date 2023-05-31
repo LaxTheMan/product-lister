@@ -3,9 +3,8 @@ package com.example.productlister.di
 import android.app.Application
 import androidx.room.Room
 import com.example.productlister.common.Constants.DATABASE_NAME
-import com.example.productlister.data.ProductDao
 import com.example.productlister.data.ProductDatabase
-import com.example.productlister.data.repository.ProductRepository
+import com.example.productlister.domain.repository.ProductRepository
 import com.example.productlister.data.repository.ProductRepositoryImpl
 import com.example.productlister.domain.use_cases.DeleteProduct
 import com.example.productlister.domain.use_cases.GetProducts

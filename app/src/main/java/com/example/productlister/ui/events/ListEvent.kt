@@ -1,4 +1,4 @@
-package com.example.productlister.util
+package com.example.productlister.ui.events
 
 import com.example.productlister.domain.model.Product
 

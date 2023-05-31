@@ -1,9 +1,9 @@
-package com.example.productlister.ui.viewmodel
+package com.example.productlister.ui.product_add
 
 data class ProductAddState(
     var name: String = "",
     var price: Int? = null,
-    var pricePerG: Float? = null,
+    var pricePerG: Double? = null,
     var netWt: Int? = null,
     var img1: String = "",
     var img2: String? = "",

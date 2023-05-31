@@ -1,4 +1,4 @@
-package com.example.productlister.ui.viewmodel
+package com.example.productlister.ui.product_add
 
 import android.util.Log
 import androidx.compose.runtime.State
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.productlister.domain.model.Product
 import com.example.productlister.domain.use_cases.UseCases
-import com.example.productlister.util.AddEvent
+import com.example.productlister.ui.events.AddEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -36,7 +36,7 @@ class ProductAddViewModel @Inject constructor(private val useCases: UseCases) : 
             }
 
             is AddEvent.PricePerGChanged -> {
-                _state.value = _state.value.copy(pricePerG = if(event.pricePerG.isBlank()) null else event.pricePerG.toFloat())
+                _state.value = _state.value.copy(pricePerG = if(event.pricePerG.isBlank()) null else event.pricePerG.toDouble())
             }
 
             is AddEvent.NetWtChanged -> {
