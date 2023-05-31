@@ -37,7 +37,7 @@ fun Navigation(navController: NavHostController) {
                 eventFlow = eventFlow
             )
         }
-        composable(route = Screen.ProductEditScreen.route + "/{productId}") {
+        composable(route = Screen.ProductEditScreen.route) {
             ProductEditScreen()
         }
     }

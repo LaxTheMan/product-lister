@@ -47,23 +47,28 @@ class ProductListViewModel @Inject constructor(private val useCases: UseCases) :
                     useCases.upsertProduct(recentlyDeletedProduct ?: return@launch)
                     recentlyDeletedProduct = null
                 }
-
             }
+
+//            is ListEvent.GetProducts -> {
+//                Log.d("debug", "get products triggered")
+//                viewModelScope.launch {
+//                    Log.d("debug", "viewmodelscope block")
+//                    useCases.getProducts().collect { products ->
+//                        Log.d("debug", products.toString())
+//                    }
+//                }
+//            }
         }
     }
 
     private fun getProducts() {
         getProductsJob?.cancel()
         viewModelScope.launch {
-            Log.d("debug","fetching")
-            useCases.getProducts().onEach { products ->
+            useCases.getProducts().collect { products ->
+                Log.d("debug",products.toString())
                 _state.value = _state.value.copy(products = products)
             }
         }
-//        getProductsJob = useCases.getProducts().onEach { products ->
-//            Log.d("debug",products.toString())
-//            _state.value = _state.value.copy(products = products)
-//        }.launchIn(viewModelScope)
     }
 
 }

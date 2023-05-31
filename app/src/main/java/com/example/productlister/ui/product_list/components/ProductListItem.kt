@@ -32,35 +32,35 @@ fun ProductListItem(
         modifier = Modifier
             .fillMaxWidth()
             .combinedClickable(onClick = { onEdit(product) }, onLongClick = { onDelete(product) })
-            .padding(vertical = 8.dp, horizontal = 16.dp),
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.Start
     ) {
-        AsyncImage(model = product.img1, contentDescription = null, modifier = Modifier.size(60.dp))
+        AsyncImage(model = product.img1, contentDescription = null, modifier = Modifier.size(60.dp).weight(0.3f))
 
         Spacer(modifier = Modifier.width(10.dp))
 
-        Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.SpaceEvenly) {
+        Column(modifier = Modifier.fillMaxWidth().weight(1f), verticalArrangement = Arrangement.SpaceEvenly) {
             Text(text = product.name, style = MaterialTheme.typography.headlineSmall)
 
-            Row(horizontalArrangement = Arrangement.SpaceBetween) {
+            Row(modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween) {
                 Text(
                     text = "Price: ₹${product.price}",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.weight(0.9f)
                 )
-                Spacer(modifier = Modifier.width(15.dp))
                 Text(
-                    text = "Rs/Gram: ${product.pricePerG}",
-                    style = MaterialTheme.typography.bodyMedium
+                    text = "₹/g: ${product.pricePerG}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.weight(0.8f)
                 )
-                Spacer(modifier = Modifier.width(15.dp))
                 Text(
                     text = "NetWt: ${product.netWt}g",
-                    style = MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
     }
-
 }
 
 @Preview

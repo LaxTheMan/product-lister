@@ -6,4 +6,6 @@ sealed class ListEvent {
     data class UpsertProduct(val product: Product): ListEvent()
     data class DeleteProduct(val product: Product) : ListEvent()
     data class RestoreProduct(val product: Product) : ListEvent()
+
+//    object GetProducts: ListEvent()
 }
