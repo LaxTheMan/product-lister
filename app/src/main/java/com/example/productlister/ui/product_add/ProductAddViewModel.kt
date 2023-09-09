@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.productlister.domain.model.Product
 import com.example.productlister.domain.use_cases.UseCases
 import com.example.productlister.ui.events.AddEvent
+import com.example.productlister.ui.events.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -44,7 +45,7 @@ class ProductAddViewModel @Inject constructor(private val useCases: UseCases) : 
             }
 
             is AddEvent.SaveProduct -> {
-                Log.d("debug","save called")
+//                Log.d("debug","save called")
                 viewModelScope.launch {
                     try {
                         useCases.upsertProduct(
@@ -64,17 +65,11 @@ class ProductAddViewModel @Inject constructor(private val useCases: UseCases) : 
                         _eventFlow.emit(UiEvent.SaveProduct)
                         _eventFlow.emit(UiEvent.ShowSnackbar(message = "Product added"))
                     } catch (e: Exception) {
-                        _eventFlow.emit(UiEvent.ShowSnackbar(message = "Unable to add product"))
+                        _eventFlow.emit(UiEvent.ShowSnackbar(message = e.message ?: "Couldn't save product"))
                         Log.d("error", e.toString())
                     }
                 }
             }
         }
-    }
-
-    // to trigger ui related events from viewmodel layer, like showing snackbar
-    sealed class UiEvent {
-        data class ShowSnackbar(val message: String): UiEvent()
-        object SaveProduct: UiEvent()
     }
 }

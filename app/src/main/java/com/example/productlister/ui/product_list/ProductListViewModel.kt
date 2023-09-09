@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.productlister.domain.model.Product
 import com.example.productlister.domain.use_cases.UseCases
 import com.example.productlister.ui.events.ListEvent
+import com.example.productlister.ui.product_add.ProductAddViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.onEach
@@ -48,16 +49,6 @@ class ProductListViewModel @Inject constructor(private val useCases: UseCases) :
                     recentlyDeletedProduct = null
                 }
             }
-
-//            is ListEvent.GetProducts -> {
-//                Log.d("debug", "get products triggered")
-//                viewModelScope.launch {
-//                    Log.d("debug", "viewmodelscope block")
-//                    useCases.getProducts().collect { products ->
-//                        Log.d("debug", products.toString())
-//                    }
-//                }
-//            }
         }
     }
 
@@ -65,10 +56,9 @@ class ProductListViewModel @Inject constructor(private val useCases: UseCases) :
         getProductsJob?.cancel()
         viewModelScope.launch {
             useCases.getProducts().collect { products ->
-                Log.d("debug",products.toString())
+//                Log.d("debug",products.toString())
                 _state.value = _state.value.copy(products = products)
             }
         }
     }
-
 }

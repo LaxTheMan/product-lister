@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
@@ -29,6 +30,7 @@ fun FormTextField(
     placeholder: String,
     leadingIcon: @Composable (() -> Unit)? = null,
     onValueChange: (String) -> Unit = {},
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     imeAction: ImeAction = ImeAction.Next,
     keyboardType: KeyboardType = KeyboardType.Text,
     isEnabled: Boolean = true,
@@ -41,6 +43,7 @@ fun FormTextField(
         value = text,
         singleLine = true,
         onValueChange = onValueChange,
+        visualTransformation = visualTransformation,
         leadingIcon = leadingIcon,
         textStyle = TextStyle(fontSize = 18.sp),
         keyboardOptions = KeyboardOptions(imeAction = imeAction, keyboardType = keyboardType),

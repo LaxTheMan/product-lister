@@ -23,6 +23,7 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -35,6 +36,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.productlister.common.Screen
 import com.example.productlister.ui.product_list.components.ProductListItem
 import com.example.productlister.ui.events.ListEvent
+import com.example.productlister.ui.events.UiEvent
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,10 +47,27 @@ import kotlinx.coroutines.launch
 fun ProductListScreen(
     navController: NavController,
     state: ProductListState,
-    onEvent: (ListEvent) -> Unit
+    onEvent: (ListEvent) -> Unit,
+    eventFlow: SharedFlow<UiEvent>
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+
+    LaunchedEffect(key1 = "ListScreen") {
+        eventFlow.collectLatest { event: UiEvent ->
+            when (event) {
+//                is UiEvent.ShowSnackbarHomeScreen -> {
+//                    Log.d("debug","event block")
+//                    snackbarHostState.showSnackbar(message = event.message)
+//                }
+
+                else -> {
+//                    Log.d("debug","others")
+                }
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("App Title") })
@@ -56,7 +78,7 @@ fun ProductListScreen(
                     .fillMaxSize()
                     .padding(contentPadding)
             ) {
-                Log.d("debug",state.products.toString())
+//                Log.d("debug",state.products.toString())
                 items(state.products) { product ->
                     ProductListItem(product = product, onEdit = {
                         navController.navigate(Screen.ProductEditScreen.route + "/${product.id}")
@@ -95,18 +117,19 @@ fun ProductListScreen(
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
+
                 navController.navigate(Screen.ProductAddScreen.route)
             }) {
                 Icon(imageVector = Icons.Filled.Add, contentDescription = null)
             }
         },
         floatingActionButtonPosition = FabPosition.End,
-        snackbarHost = { SnackbarHost(snackbarHostState) },
+        snackbarHost = {SnackbarHost(hostState = snackbarHostState)},
     )
 }
 
 @Preview
 @Composable
 fun ProductListScreenPreview() {
-    ProductListScreen(rememberNavController(), state = ProductListState(emptyList(),"",false), onEvent = {})
+    ProductListScreen(rememberNavController(), state = ProductListState(emptyList(),"",false), onEvent = {}, eventFlow = MutableSharedFlow())
 }

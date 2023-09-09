@@ -1,6 +1,7 @@
 package com.example.productlister.common
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -10,6 +11,7 @@ import com.example.productlister.ui.product_edit.ProductEditScreen
 import com.example.productlister.ui.product_list.ProductListScreen
 import com.example.productlister.ui.product_add.ProductAddViewModel
 import com.example.productlister.ui.product_list.ProductListViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun Navigation(navController: NavHostController) {
@@ -18,23 +20,24 @@ fun Navigation(navController: NavHostController) {
         startDestination = Screen.ProductListScreen.route
     ) {
         composable(route = Screen.ProductListScreen.route) {
-            val viewModel = hiltViewModel<ProductListViewModel>()
-            var state = viewModel.state.value
+            val productListViewModel = hiltViewModel<ProductListViewModel>()
+            val state = productListViewModel.state.value
+            val productAddViewModel = hiltViewModel<ProductAddViewModel>()
             ProductListScreen(
                 navController = navController,
                 state = state,
-                onEvent = viewModel::onEvent
+                onEvent = productListViewModel::onEvent,
+                eventFlow = productAddViewModel.eventFlow
             )
         }
         composable(route = Screen.ProductAddScreen.route) {
-            val viewModel = hiltViewModel<ProductAddViewModel>()
-            var state = viewModel.state.value
-            val eventFlow = viewModel.eventFlow
+            val productAddViewModel = hiltViewModel<ProductAddViewModel>()
+            val state = productAddViewModel.state.value
             ProductAddScreen(
                 navController = navController,
                 state = state,
-                onEvent = viewModel::onEvent,
-                eventFlow = eventFlow
+                onEvent = productAddViewModel::onEvent,
+                eventFlow = productAddViewModel.eventFlow
             )
         }
         composable(route = Screen.ProductEditScreen.route) {
